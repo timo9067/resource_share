@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} - Resources {% endblock title %}
+
+{% block content %}
+
+<h1>{{res.title}}</h1>
+<p><b>User: </b>{{res.user_id.username}}</p>
+<p><b>Link: </b>{{res.link}}</p>
+<p><b>Description: </b>{{res.description}}</p>
+<p><b>Category: </b>{{res.cat_id.cat}}</p>
+<p><b>Tags: </b>{{res.all_tags}}</p>
+<p><b>Reviews number: </b>{{rev_count}}</p>
+<p><b>Rating: </b>
+    {% if avg_rating != 0 %}
+    {{avg_rating}}
+    {% else %}
+    None
+    {% endif %}
+</p>
+<p><b>Date of publishing: </b>{{res.created_at}}</p>
+
+{% endblock content %}
