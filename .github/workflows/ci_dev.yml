@@ -30,6 +30,16 @@ jobs:
       DB_PORT: ${{ vars.DB_PORT }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
+    services:
+      postgres_main:
+        image: postgres:15
+        env: 
+          POSTGRES_USER: ${{ env.DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.DB_PWD }}
+          POSTGRES_DB: ${{ env.DB_NAME }}
+        ports: 
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v3 # pre-build in GitHub
     - name: Set up Python ${{ matrix.python-version }}
