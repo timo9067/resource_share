@@ -8,8 +8,13 @@ name: Django Test
 on:
   push:
     branches: [ "dev" ]
-  pull_request:
+  pull_request_target: # To be able to access secrets
     branches: [ "dev" ]
+    types: [opened] # run workflow only for opened pull requests
+    path: # run workflow only when .py files are modified
+      - "**.py"
+
+env: ${{ secrets }}
 
 jobs:
   build: # job id
@@ -17,8 +22,9 @@ jobs:
     runs-on: ubuntu-latest # OS to build project on
     strategy:
       fail-fast: false
+      max-parallel: 4
       matrix:
-        python-version: ["3.9", "3.10", "3.11"] # Python version to build the app
+        python-version: ["3.10", "3.11"] # Python version to build the app
 
     env: # environment variables
       # Use `secretes` to acess secrets
